@@ -37,3 +37,11 @@ jobs:
           context: .
           push: true
           tags: jgois/sfhserver:latest
+
+      - name: Sync
+        uses: ms-jpq/sync-dockerhub-readme@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: <dockerhub password>
+          repository: ${{ secrets.DOCKERHUB_TOKEN }}
+          readme: "./README.md"
