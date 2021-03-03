@@ -1,0 +1,14 @@
+DOCKERIMAGE = sfhserver
+DOCKERTAG = latest
+DOCKERIMAGETAG = $(DOCKERIMAGE):$(DOCKERTAG)
+#DOCKERREMOTE = docker.localhost/JorGois/$(DOCKERIMAGETAG)
+DOCKERREMOTE = $(DOCKERIMAGETAG)
+
+DOCKERCMD = docker run $(DOCKERFLAGS) $(DOCKERIMAGE) $(PYTESTARGS)
+
+build:
+	docker build --rm -f Dockerfile -t $(DOCKERIMAGETAG) -t $(DOCKERREMOTE) .
+publish:
+	docker push $(DOCKERREMOTE)
+run:
+	docker run -p 8080:8080 $(DOCKERREMOTE)
