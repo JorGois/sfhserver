@@ -1,0 +1,62 @@
+---
+config:
+  - name: request_duration
+    description: The request duration histogram.
+    type: histogram
+    labels: [path]
+    sequence:
+      - interval: 3
+        eval_time: 2
+        values: 1-200
+        labels:
+          path: "/histogram"
+  - name: summary_request_duration
+    description: The request duration summary.
+    type: histogram
+    labels: [path]
+    sequence:
+      - interval: 3
+        eval_time: 2
+        values: 10-20
+        labels:
+          path: "/summary"
+  - name: number_of_requests_in_progress
+    description: The number of requests in progress gauge.
+    type: gauge
+    labels: [value]
+    sequence:
+      - interval: 3
+        eval_time: 2
+        value: 50
+        operation: set
+        labels:
+          value: "requests_in_progress"
+      - interval: 3
+        eval_time: 2
+        values: 1-5
+        operation: inc
+        labels:
+          value: "requests_in_progress"
+      - interval: 10
+        eval_time: 2
+        values: 2-8
+        operation: dec
+        labels:
+          value: "requests_in_progress"
+  - name: number_of_errors
+    description: Counter of random erros.
+    type: Counter
+    labels: [value]
+    sequence:
+      - interval: 3
+        eval_time: 2
+        value: 50
+        operation: set
+        labels:
+          value: "function_error"
+      - interval: 3
+        eval_time: 2
+        values: 5-10
+        operation: dec
+        labels:
+          value: "function_error"
