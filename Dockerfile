@@ -6,6 +6,7 @@ COPY requirements.txt ./
 RUN pip install -r requirements.txt
 
 WORKDIR /usr/src/app
+COPY config.yml .
 COPY src/* .
 ENTRYPOINT [ "python3", "./server.py" ]
 # expose port
